@@ -3,6 +3,7 @@ package springdemo.beans;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -37,5 +38,11 @@ public class FileFortuneService implements FortuneService {
             throw new IllegalArgumentException();
         }
         return stringBuilder.toString().split("\\n");
+    }
+
+    @PostConstruct
+    private void initMethod() {
+        System.out.println("FileFortuneService >> inside the init method. Fortune: ");
+        System.out.println(getFortune());
     }
 }
