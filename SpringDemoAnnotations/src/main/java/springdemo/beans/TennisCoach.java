@@ -3,11 +3,15 @@ package springdemo.beans;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-@SuppressWarnings("CommentedOutCode")
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 @Component
 public class TennisCoach implements Coach {
+
     @Value("${foo.email}")
     private String email;
     @Value("${foo.team}")
@@ -15,11 +19,23 @@ public class TennisCoach implements Coach {
 
     private FortuneService fortuneService;
 
-//    @Autowired
-//    public TennisCoach(@Qualifier("normFortuneService") FortuneService fortuneService) {
-//        System.out.println("Inside tennis coach constructor");
-//        this.fortuneService = fortuneService;
-//    }
+   /* @Autowired
+    public TennisCoach(@Qualifier("normFortuneService") FortuneService fortuneService) {
+        System.out.println("Inside tennis coach constructor");
+        this.fortuneService = fortuneService;
+    }*/
+
+    // define an init method
+    @PostConstruct
+    private void doMyStartupStuff() {
+        System.out.println("TennisCoach >> Inside the doMyStartupStuff");
+    }
+
+    // define a cleanup method
+    @PreDestroy
+    private void doMyCleanupStuff() {
+        System.out.println("TennisCoach >> Inside the doMyCleanupStuff");
+    }
 
     @Autowired
     public void setFortuneService(@Qualifier("fileFortuneService") FortuneService fortuneService) {
