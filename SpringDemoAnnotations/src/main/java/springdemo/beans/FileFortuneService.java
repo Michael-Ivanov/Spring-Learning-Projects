@@ -13,8 +13,8 @@ import java.util.Random;
 @Component
 public class FileFortuneService implements FortuneService {
     
-    @Value("${fortunesFile}")
-    private String pathToFile;
+//    @Value("${fortunesFile}")
+    private String pathToFile = "./src/main/resources/fortunesFile.txt";
 
     @Override
     public String getFortune() {
@@ -35,7 +35,7 @@ public class FileFortuneService implements FortuneService {
                 stringBuilder.append(line).append("\n");
             }
         } catch (IOException e) {
-            throw new IllegalArgumentException();
+            System.out.println("Can not open the file. Please check the path.");
         }
         return stringBuilder.toString().split("\\n");
     }
