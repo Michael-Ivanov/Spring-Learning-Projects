@@ -39,10 +39,4 @@ public class FileFortuneService implements FortuneService {
         }
         return stringBuilder.toString().split("\\n");
     }
-
-    @PostConstruct
-    private void initMethod() {
-        System.out.println("FileFortuneService >> inside the init method. Fortune: ");
-        System.out.println(getFortune());
-    }
 }
