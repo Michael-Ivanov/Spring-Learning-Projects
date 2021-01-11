@@ -10,6 +10,8 @@
 <br><br>
 
 <h2>Student name: ${param.studentName}</h2>
+<h2>The message: ${yoMessage}</h2>
+<h2>An object: ${someObject}</h2>
 
 </body>
 </html>
