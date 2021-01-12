@@ -3,9 +3,11 @@ package miv.study.example.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Locale;
+import java.util.Optional;
 
 @Controller
 public class HelloWorldController {
@@ -39,6 +41,22 @@ public class HelloWorldController {
         return "helloworld";
     }
 
+    @RequestMapping("/processFormVersionThree")
+    public String processFormVersionThree(
+            @RequestParam(defaultValue = "noname", value = "studentName") String theName,
+            Model model) {
+
+        // convert the name to uppercase and create the message
+
+        String result = "Hello, my friend " + theName;
+
+        // add message to the model
+        model.addAttribute("yoMessage", result);
+        model.addAttribute("someObject", new Object());
+
+
+        return "helloworld";
+    }
 
 
 }
