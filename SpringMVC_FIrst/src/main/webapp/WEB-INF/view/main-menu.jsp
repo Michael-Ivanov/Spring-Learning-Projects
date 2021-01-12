@@ -7,7 +7,7 @@
 <h1>Hello world</h1>
 <h2>Spring demo page</h2>
 
-<a href="showForm">Show form</a>
+<a href="hello/showForm">Show form</a>
 
 </body>
 </html>

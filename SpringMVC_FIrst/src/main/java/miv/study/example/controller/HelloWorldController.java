@@ -10,6 +10,7 @@ import java.util.Locale;
 import java.util.Optional;
 
 @Controller
+@RequestMapping("/hello")
 public class HelloWorldController {
 
     // need a controller method to show the init HTML form
