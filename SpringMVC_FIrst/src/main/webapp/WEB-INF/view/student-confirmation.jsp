@@ -6,9 +6,10 @@
 <body>
 
 <h2>Student confirmed from Model: ${student.firstName} ${student.lastName}</h2>
-<br><br>
+<br>
 <h2>Student confirmed from Request: ${param.firstName} ${param.lastName}</h2>
-
+<br>
+<h2> Country: ${student.country}</h2>
 
 </body>
 </html>
