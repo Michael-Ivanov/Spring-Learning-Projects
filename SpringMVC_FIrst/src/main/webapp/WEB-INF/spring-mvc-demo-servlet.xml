@@ -11,7 +11,6 @@
 
     <!-- 3: add support for component scanning -->
     <context:component-scan base-package="miv.study.example"/>
-    <util:properties id="countryOptionsFromAppController" location="classpath*:countries.properties"/>
 
     <!-- 4: add support for conversion, formatting and validation support-->
     <mvc:annotation-driven/>

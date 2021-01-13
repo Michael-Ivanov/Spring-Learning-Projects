@@ -1,10 +1,13 @@
 package miv.study.example.bean;
 
+import java.util.List;
+
 public class Student {
 
     private String firstName;
     private String lastName;
     private String country;
+    private String favouriteLanguage;
 
     public String getFirstName() {
         return firstName;
@@ -28,5 +31,21 @@ public class Student {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public String getFavouriteLanguage() {
+        return favouriteLanguage;
+    }
+
+    public void setFavouriteLanguage(String favouriteLanguage) {
+        this.favouriteLanguage = favouriteLanguage;
+    }
+
+    public List<String> getCountryOptions() {
+        return StudentProperties.getCountriesList();
+    }
+
+    public List<String> getLanguageOptions() {
+        return StudentProperties.getLanguageOptions();
     }
 }

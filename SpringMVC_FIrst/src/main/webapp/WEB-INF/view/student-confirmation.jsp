@@ -10,6 +10,8 @@
 <h2>Student confirmed from Request: ${param.firstName} ${param.lastName}</h2>
 <br>
 <h2> Country: ${student.country}</h2>
+<br>
+<h2> Favourite Language: ${student.favouriteLanguage}</h2>
 
 </body>
 </html>
