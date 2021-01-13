@@ -12,19 +12,19 @@
     <br>    <br>
     Last name: <form:input path="lastName" />
     <br>    <br>
+
     Country:
     <form:select path="country">
         <form:options items="${student.countryOptions}"/>
     </form:select>
     <br>    <br>
+
     Favourite Language: <br>
     <form:radiobuttons path="favouriteLanguage" items="${student.languageOptions}" />
     <br>    <br>
 
     Operating Systems:
-    Linux <form:checkbox path="operatingSystems" value="Linux"/>
-    Mac OS <form:checkbox path="operatingSystems" value="Mac OS"/>
-    Windows <form:checkbox path="operatingSystems" value="Windows"/>
+    Linux <form:checkboxes path="operatingSystems" items="${student.osOptions}"/>
 
     <br>    <br>
     <input type="submit" value="Submit" />

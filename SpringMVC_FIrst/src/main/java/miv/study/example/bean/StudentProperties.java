@@ -1,6 +1,5 @@
 package miv.study.example.bean;
 
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +7,7 @@ public class StudentProperties {
 
     private static List<String> countryOptions;
     private static List<String> languageOptions;
+    private static List<String> osOptions;
 
     static {
         countryOptions = new LinkedList<>();
@@ -28,6 +28,12 @@ public class StudentProperties {
         languageOptions.add("PHP");
         languageOptions.add("JavaScript");
     }
+    static {
+        osOptions = new LinkedList<>();
+        osOptions.add("Linux");
+        osOptions.add("Mac OS");
+        osOptions.add("Windows");
+    }
 
     public static List<String> getCountriesList() {
         return countryOptions;
@@ -35,5 +41,9 @@ public class StudentProperties {
 
     public static List<String> getLanguageOptions() {
         return languageOptions;
+    }
+
+    public static List<String> getOsOptions() {
+        return osOptions;
     }
 }

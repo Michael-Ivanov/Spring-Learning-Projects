@@ -46,6 +46,10 @@ public class Student {
         return StudentProperties.getCountriesList();
     }
 
+    public List<String> getOsOptions() {
+        return StudentProperties.getOsOptions();
+    }
+
     public List<String> getLanguageOptions() {
         return StudentProperties.getLanguageOptions();
     }
