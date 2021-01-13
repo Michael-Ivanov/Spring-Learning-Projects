@@ -1,8 +1,5 @@
 package miv.study.example.bean;
 
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-
 public class Student {
 
     private String firstName;
@@ -32,9 +29,4 @@ public class Student {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public LinkedList<String> getCountryOptions() {
-        return Countries.getCountriesList();
-    }
-
 }
