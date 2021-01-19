@@ -9,7 +9,8 @@
 
 <a href="hello/showForm">Show form</a><br>
 
-<a href="student/showForm">Student registration from</a>
+<a href="student/showForm">Student registration from</a><br>
 
+<a href="customer/showForm">Customer form</a>
 </body>
 </html>
