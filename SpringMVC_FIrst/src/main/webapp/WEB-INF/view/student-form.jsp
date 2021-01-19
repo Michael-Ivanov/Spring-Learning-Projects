@@ -6,6 +6,8 @@
 </head>
 <body>
 
+
+
 <form:form action="processForm" modelAttribute="student">
 
     First name: <form:input path="firstName" />
@@ -24,7 +26,7 @@
     <br>    <br>
 
     Operating Systems:
-    Linux <form:checkboxes path="operatingSystems" items="${student.osOptions}"/>
+    <form:checkboxes path="operatingSystems" items="${student.osOptions}"/>
 
     <br>    <br>
     <input type="submit" value="Submit" />
