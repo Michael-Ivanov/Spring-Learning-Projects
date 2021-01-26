@@ -2,11 +2,8 @@ package miv.study.config;
 
 import miv.study.entity.Student;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
-import org.hibernate.context.internal.ThreadLocalSessionContext;
-import org.hibernate.service.ServiceRegistry;
 
 import java.util.Properties;
 
