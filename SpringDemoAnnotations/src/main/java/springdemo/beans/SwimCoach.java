@@ -1,7 +1,11 @@
 package springdemo.beans;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
+@Component
 public class SwimCoach implements Coach {
 
     private FortuneService fortuneService;
@@ -12,7 +16,8 @@ public class SwimCoach implements Coach {
     @Value("${foo.team}")
     private String team;
 
-    public SwimCoach(FortuneService fortuneService) {
+    @Autowired
+    public SwimCoach(@Qualifier(value = "fileFortuneService") FortuneService fortuneService) {
         this.fortuneService = fortuneService;
     }
 

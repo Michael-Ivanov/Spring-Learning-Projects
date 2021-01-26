@@ -11,7 +11,7 @@ import springdemo.beans.SwimCoach;
 
 @Configuration
 @PropertySource("classpath:sport.properties")
-//@ComponentScan(basePackages = {"springdemo"})
+@ComponentScan(basePackages = {"springdemo"})
 public class SportConfig {
 
     // define bean for our sad fortune service
