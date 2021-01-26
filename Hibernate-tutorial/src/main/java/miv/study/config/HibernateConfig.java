@@ -20,7 +20,7 @@ public class HibernateConfig {
 
                 // set of properties
                 Properties properties = new Properties();
-//                properties.put(Environment.DRIVER, "org.postgresql.Driver");
+                properties.put(Environment.DRIVER, "org.postgresql.Driver");
                 properties.put(Environment.URL, "jdbc:postgresql://localhost/hb_student_tracker");
                 properties.put(Environment.USER, "hbstudent");
                 properties.put(Environment.PASS, "hbstudent");
@@ -31,8 +31,6 @@ public class HibernateConfig {
                 configuration.setProperties(properties);
                 // add annotated class
                 configuration.addAnnotatedClass(Student.class);
-//                ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-//                        .applySettings(configuration.getProperties()).build();
                 sessionFactory = configuration.buildSessionFactory();
             } catch (Exception e) {
                 e.printStackTrace();

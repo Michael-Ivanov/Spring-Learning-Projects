@@ -6,6 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 public class CreateStudentDemo {
+
     public static void main(String[] args) {
 
         // create session factory

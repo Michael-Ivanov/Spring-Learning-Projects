@@ -1,7 +1,5 @@
 package miv.study.entity;
 
-import com.sun.istack.NotNull;
-
 import javax.persistence.*;
 
 @Entity
