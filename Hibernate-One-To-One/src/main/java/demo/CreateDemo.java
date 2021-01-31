@@ -17,8 +17,13 @@ public class CreateDemo {
 
         try(Session session = factory.getCurrentSession()) {
             // create the objects
-            Instructor instructor = new Instructor("Chad", "Darby", "darby@mail.com");
-            InstructorDetail detail = new InstructorDetail("http://www.youtube.com/hhh", "Eating");
+            /*Instructor instructor = new Instructor("Chad", "Darby", "darby@mail.com");
+            InstructorDetail detail = new InstructorDetail("http://www.youtube.com/hhh", "Eating");*/
+
+            Instructor instructor = new Instructor(
+                    "Madhu", "Patel", "m_patel@mail.com");
+            InstructorDetail detail = new InstructorDetail(
+                    "http://www.youtube.com/patel_madhu", "Meditation");
 
             // associate the objects
             instructor.setInstructorDetail(detail);
@@ -39,5 +44,4 @@ public class CreateDemo {
             e.printStackTrace();
         }
     }
-
 }
