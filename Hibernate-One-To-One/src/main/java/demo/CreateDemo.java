@@ -21,7 +21,7 @@ public class CreateDemo {
             InstructorDetail detail = new InstructorDetail("http://www.youtube.com/hhh", "Eating");*/
 
             Instructor instructor = new Instructor(
-                    "Madhu", "Patel", "m_patel@mail.com");
+                    "Mike", "Nov", "m.nov@mail.com");
             InstructorDetail detail = new InstructorDetail(
                     "http://www.youtube.com/patel_madhu", "Meditation");
 

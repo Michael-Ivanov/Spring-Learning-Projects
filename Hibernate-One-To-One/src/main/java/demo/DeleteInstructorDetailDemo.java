@@ -17,7 +17,7 @@ public class DeleteInstructorDetailDemo {
                 .addAnnotatedClass(InstructorDetail.class)
                 .buildSessionFactory();
             Session session = factory.getCurrentSession()) {
-            int id = 1;
+            int id = 5;
 
             // begin a transaction
             session.beginTransaction();
@@ -29,6 +29,11 @@ public class DeleteInstructorDetailDemo {
             System.out.println("The associated instructor: " + instructorDetail.getInstructor());
             // delete the instructor detail
             System.out.println("Deleting instructorDetail: " + instructorDetail);
+            // remove the associated object reference
+            // break bi-directional link
+
+            instructorDetail.getInstructor().setInstructorDetail(null);
+
             session.delete(instructorDetail);
             // commit transaction
             session.getTransaction().commit();

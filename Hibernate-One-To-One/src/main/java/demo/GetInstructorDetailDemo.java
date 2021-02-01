@@ -10,12 +10,13 @@ public class GetInstructorDetailDemo {
 
     public static void main(String[] args) {
 
-        SessionFactory factory = HibernateConfig.getConfiguration()
+
+
+        try(SessionFactory factory = HibernateConfig.getConfiguration()
                 .addAnnotatedClass(Instructor.class)
                 .addAnnotatedClass(InstructorDetail.class)
                 .buildSessionFactory();
-
-        try(Session session = factory.getCurrentSession()) {
+            Session session = factory.getCurrentSession()) {
             int id = 1;
 
             // begin a transaction
