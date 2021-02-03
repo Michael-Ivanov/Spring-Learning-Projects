@@ -43,7 +43,7 @@ public class WebConfig implements WebMvcConfigurer {
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         try {
             cpds.setDriverClass("org.postgresql.Driver");
-            cpds.setJdbcUrl("miv.study.jdbc:postgresql://localhost/web_customer_tracker");
+            cpds.setJdbcUrl("jdbc:postgresql://localhost/web_customer_tracker");
             cpds.setUser("hbstudent");
             cpds.setPassword("hbstudent");
             cpds.setMinPoolSize(5);
