@@ -21,7 +21,7 @@ import java.util.Properties;
 @EnableWebMvc
 @EnableTransactionManagement   // todo: check how it works if we remove this annotation
 @ComponentScan("miv.study")
-public class WebConfig implements WebMvcConfigurer {
+public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
