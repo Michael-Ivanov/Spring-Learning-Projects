@@ -7,36 +7,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-import org.springframework.web.servlet.view.JstlView;
 
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
 @EnableTransactionManagement   // todo: check how it works if we remove this annotation
 @ComponentScan("miv.study")
-public class SpringConfig implements WebMvcConfigurer {
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/").setViewName("main-menu");  // todo: rename view
-    }
-
-    @Bean
-    public ViewResolver viewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/view/");
-        resolver.setSuffix(".jsp");
-
-        return resolver;
-    }
+public class SpringBeanConfig {
 
     @Bean
     public ComboPooledDataSource myDataSource() {
@@ -78,4 +56,5 @@ public class SpringConfig implements WebMvcConfigurer {
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         return hibernateProperties;
     }
+
 }
