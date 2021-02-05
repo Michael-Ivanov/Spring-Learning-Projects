@@ -2,6 +2,7 @@ package miv.study.controller;
 
 import miv.study.dao.CustomerDAO;
 import miv.study.entity.Customer;
+import miv.study.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,15 +15,15 @@ import java.util.List;
 @RequestMapping("/customer")
 public class CustomerController {
 
-    // need to inject the customer dao
+    // need to inject the customer service
     @Autowired
-    private CustomerDAO customerDAO;
+    private CustomerService customerService;
 
     @GetMapping("/list")
     public String listCustomers(Model model) {
 
-        // get customer from the dao
-        List<Customer> customers = customerDAO.getCustomers();
+        // get customer from the service
+        List<Customer> customers = customerService.getCustomers();
         // add the customers to the model
         model.addAttribute("customers", customers);
 
