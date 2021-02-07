@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 
 @Repository
 public class CustomerDAOImpl implements CustomerDAO {
@@ -28,6 +29,17 @@ public class CustomerDAOImpl implements CustomerDAO {
         List<Customer> customers = query.getResultList();
         // return the results
         return customers;
+    }
+
+    @Override
+    public List<Customer> searchCustomers(String name) {
+        Session session = sessionFactory.getCurrentSession();
+        Query<Customer> query = session.createQuery(
+                "from Customer where lower(firstName) like : likeName " +
+                        "or lower(lastName) like : likeName", Customer.class);
+        query.setParameter("likeName", "%" + name.toLowerCase() + "%");
+        List<Customer> list = query.getResultList();
+        return list;
     }
 
     @Override

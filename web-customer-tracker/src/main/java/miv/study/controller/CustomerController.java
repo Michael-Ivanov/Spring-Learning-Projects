@@ -61,6 +61,18 @@ public class CustomerController {
     public String delete(@RequestParam("customerId") int id, Model model) {
         customerService.deleteCustomer(id);
         return "redirect:/customer/list";
+    }
 
+    @GetMapping("/searchCustomer")
+    public String searchCustomer(@RequestParam("searchName") String name, Model model) {
+        // check for null or empty name
+        if (name == null || name.isEmpty()) {
+            return "redirect:/customer/list";
+        }
+        // get appropriate list of customers
+        List<Customer> customers = customerService.searchCustomers(name);
+        // add list of customers to the model
+        model.addAttribute("customers", customers);
+        return "list-customers";
     }
 }
