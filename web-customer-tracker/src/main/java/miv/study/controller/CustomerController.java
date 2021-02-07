@@ -4,6 +4,7 @@ import miv.study.dao.CustomerDAO;
 import miv.study.entity.Customer;
 import miv.study.service.CustomerService;
 import org.dom4j.rule.Mode;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,7 +54,13 @@ public class CustomerController {
     public String saveCustomer(@ModelAttribute("customer") Customer customer) {
         // save the customer using our service
         customerService.saveCustomer(customer);
-        System.out.println("Should save the customer");
         return "redirect:/customer/list";
+    }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("customerId") int id, Model model) {
+        customerService.deleteCustomer(id);
+        return "redirect:/customer/list";
+
     }
 }
