@@ -5,7 +5,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class MembershipDAO {
 
-    public void addSomething() {
+    public boolean addSomething() {
             System.out.println(getClass() + ": DOING STUFF. ADDING SOMETHING");
+
+            return true;
     }
 }
