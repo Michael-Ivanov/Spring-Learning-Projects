@@ -9,9 +9,9 @@ import org.springframework.stereotype.Component;
 public class MyDemoLoggingAspect {
 
     // this is where we add all of our related advices for logging
-    @Before("execution(public void addAccount())")
+    @Before("execution(public void miv.study.aopdemo.dao.AccountDAO.addAccount())")
     public void beforeAddAccountAdvice() {
-        System.out.println(">> Executing @Before advice on addAccount()");
+        System.out.println(">> Executing @Before advice on AccountDAO.addAccount()");
     }
 
 
