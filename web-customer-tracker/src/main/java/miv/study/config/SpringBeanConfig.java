@@ -1,13 +1,16 @@
 package miv.study.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 
@@ -16,8 +19,11 @@ import java.util.Properties;
 @ComponentScan("miv.study")
 public class SpringBeanConfig {
 
+    @Autowired
+    private Environment environment;
+
     @Bean
-    public ComboPooledDataSource myDataSource() {
+    public DataSource myDataSource() {
         ComboPooledDataSource cpds = new ComboPooledDataSource();
         try {
             cpds.setDriverClass("org.postgresql.Driver");
