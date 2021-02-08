@@ -10,7 +10,7 @@ public class MyDemoLoggingAspect {
 
     // this is where we add all of our related advices for logging
 //    @Before("execution(public void add*())")
-    @Before("execution(boolean add*())")
+    @Before("execution(* add*(String...))")
     public void beforeAddAccountAdvice() {
         System.out.println(">> Executing @Before advice on add*()");
     }
