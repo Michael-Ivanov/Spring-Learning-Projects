@@ -11,17 +11,28 @@ public class MyDemoLoggingAspect {
 
     // this is where we add all of our related advices for logging
 //    @Before("execution(public void add*())")
-    @Pointcut("execution(* add*(String...))")
+    @Pointcut("execution(* miv.study.aopdemo.dao.*.*(..))")
     private void myPointcut() {}
 
+    // create pointcut for getter methods
+    @Pointcut("execution(* miv.study.aopdemo.dao.*.get*(..))")
+    private void getterPoint() {}
 
-    @Before("myPointcut()")
+    // create pointcut for setter methods
+    @Pointcut("execution(* miv.study.aopdemo.dao.*.set*(..))")
+    private void setterPoint() {}
+
+    // create pointcut: include package && exclude getters/setters
+    @Pointcut("myPointcut() && !(getterPoint() || setterPoint())")
+    private void excludeGettersAndSetters() {}
+
+    @Before("excludeGettersAndSetters()")
     public void beforeAddAccountAdvice() {
-        System.out.println(">> Executing @Before advice on add*()");
+        System.out.println(">> Executing @Before excluding getters/setters");
     }
 
     @Before(value = "myPointcut()")
     public void anotherBeforeAdvice() {
-        System.out.println("another advice");
+        System.out.println(">> Executing another advice on all methods");
     }
 }
