@@ -15,13 +15,15 @@ public class MyDemoLoggingAspect {
     @Before("miv.study.aopdemo.aspect.AopExpressions.excludeGettersAndSetters()")
     public void beforeAddAccountAdvice(JoinPoint joinPoint) {
         System.out.println(">> Executing @Before excluding getters/setters");
-
         // display the method signature
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         System.out.println("Method: " + signature);
         // display the method arguments
-
-
-
+        // get args
+        Object[] args = joinPoint.getArgs();
+        // loop through args
+        for (Object arg : args) {
+            System.out.println(arg);
+        }
     }
 }
