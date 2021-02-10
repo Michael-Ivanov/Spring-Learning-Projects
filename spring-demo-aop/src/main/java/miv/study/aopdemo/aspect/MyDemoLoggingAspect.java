@@ -39,6 +39,11 @@ public class MyDemoLoggingAspect {
         String method = joinPoint.getSignature().toShortString();
         System.out.println(">>>> Executing @AfterReturning on method: " + method);
 
+        // post-process the results
+        if (!result.isEmpty()) {
+            result.get(0).setName("Daffy Duck");
+        }
+
         // print out the results
         System.out.println(">>>> result is: " + result);
     }
