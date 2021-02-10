@@ -3,6 +3,7 @@ package miv.study.aopdemo.aspect;
 import miv.study.aopdemo.entity.Account;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -32,7 +33,7 @@ public class MyDemoLoggingAspect {
     }
 
     @AfterReturning(
-            pointcut = "execution(* miv.study.aopdemo.dao.AccountDAO.findAccounts(..))",
+            pointcut = "miv.study.aopdemo.aspect.AopExpressions.afterThrowingPointcut()",
             returning = "result")
     public void afterReturningFindAccountsAdvice(JoinPoint joinPoint, List<Account> result) {
         // print out which method we are advising on
@@ -48,5 +49,13 @@ public class MyDemoLoggingAspect {
         System.out.println(">>>> result is: " + result);
     }
 
+    @AfterThrowing(
+            pointcut = "miv.study.aopdemo.aspect.AopExpressions.afterThrowingPointcut()",
+            throwing = "exception"
+    )
+    public void afterThrowingFindAccountsAdvice(JoinPoint joinPoint, Exception exception) {
+        System.out.println("####> After throwing advice: " + exception);
 
+
+    }
 }

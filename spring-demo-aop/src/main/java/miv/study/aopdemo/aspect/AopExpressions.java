@@ -21,4 +21,7 @@ public class AopExpressions {
     // create pointcut: include package && exclude getters/setters
     @Pointcut("myPointcut() && !(getterPoint() || setterPoint())")
     public void excludeGettersAndSetters() {}
+
+    @Pointcut("execution(* miv.study.aopdemo.dao.AccountDAO.findAccounts(..))")
+    public void afterThrowingPointcut() {}
 }

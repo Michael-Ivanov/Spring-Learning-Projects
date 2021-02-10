@@ -13,7 +13,13 @@ public class AccountDAO {
     private String serviceName;
 
 
-    public List<Account> findAccounts() {
+    public List<Account> findAccounts(boolean tripWire) {
+
+        // simulate an exception
+        if (tripWire) {
+            throw new RuntimeException("No soup for you!");
+        }
+
         List<Account> accounts = new ArrayList<>();
         accounts.add(new Account("John", "Silver"));
         accounts.add(new Account("Madhu", "Platinum"));
