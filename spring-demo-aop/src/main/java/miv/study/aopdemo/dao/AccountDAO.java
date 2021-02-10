@@ -1,12 +1,26 @@
 package miv.study.aopdemo.dao;
 
+import miv.study.aopdemo.entity.Account;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class AccountDAO {
 
     private String name;
     private String serviceName;
+
+
+    public List<Account> findAccounts() {
+        List<Account> accounts = new ArrayList<>();
+        accounts.add(new Account("John", "Silver"));
+        accounts.add(new Account("Madhu", "Platinum"));
+        accounts.add(new Account("Luca", "Gold"));
+
+        return accounts;
+    }
 
     public void addAccount(String... param) {
         System.out.println(getClass() + ": DOING MY DB WORK: ADDING AN ACCOUNT");
