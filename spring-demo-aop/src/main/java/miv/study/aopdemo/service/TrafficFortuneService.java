@@ -7,10 +7,13 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TrafficFortuneService {
 
-    public String getFortune() {
+    public String getFortune(boolean flag) {
+        if (flag) {
+            throw new RuntimeException("Catch it now. Major accident!");
+        }
         // simulate a delay
         try {
-            TimeUnit.SECONDS.sleep(3);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

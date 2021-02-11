@@ -62,18 +62,20 @@ public class MyDemoLoggingAspect {
     }
 
     @Around("execution(* miv.study.aopdemo.service.*.get*(..))")
-    public Object aroundGetFortune(ProceedingJoinPoint joinPoint) {
+    public Object aroundGetFortune(ProceedingJoinPoint joinPoint) throws Throwable{
         // print out method we are advising on
         String method = joinPoint.getSignature().toShortString();
         System.out.println("===> Executing @Around on method: " + method);
         // get begin stamp
         long begin = System.currentTimeMillis();
         // execute the method
-        Object result = null;
+        Object result;
         try {
             result = joinPoint.proceed();
-        } catch (Throwable throwable) {
-            throwable.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("@Around advice: we have an exception: " + e);
+            System.out.println("@Around advice: we handled the exception.");
+            result = "Nothing exciting here. Move along!";
         }
         // get end stamp
         long end = System.currentTimeMillis();
