@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
     <title>Home Page</title>
@@ -7,6 +8,14 @@
 
 <h2>Company Home Page</h2>
 <hr>
-Welcome to the company home page!
+<p>
+    Welcome to the company home page!
+</p>
+
+<%--Add a logout button--%>
+<form:form action="${pageContext.request.contextPath}/logout" method="post">
+    <input type="submit" value="Logout">
+</form:form>
+
 </body>
 </html>
