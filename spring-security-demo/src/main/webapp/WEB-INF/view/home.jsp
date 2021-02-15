@@ -7,6 +7,7 @@
     <title>Home Page</title>
 </head>
 <body>
+<jsp:include page="logged_user.jsp"/>
 
 <h2>Company Home Page</h2>
 <hr>

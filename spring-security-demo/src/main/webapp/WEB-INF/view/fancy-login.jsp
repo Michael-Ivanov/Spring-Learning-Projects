@@ -21,6 +21,7 @@
 </head>
 
 <body>
+<jsp:include page="logged_user.jsp"/>
 
 <div>
 

@@ -4,6 +4,7 @@
     <title>Landing Page</title>
 </head>
 <body>
+<jsp:include page="logged_user.jsp"/>
 <h2>Landing Page</h2>
 <hr>
 <p>
