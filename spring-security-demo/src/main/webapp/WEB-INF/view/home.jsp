@@ -17,12 +17,18 @@
 <hr>
 <p>
     User: <security:authentication property="principal.username"/>
-</p>
-<p>
+<br>
     Role(s): <security:authentication property="principal.authorities"/>
 </p>
 <hr>
+<%-- Add a link to point to /leaders --%>
+<p>
+    <a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
+    (only for manager peeps)
+</p>
 
+
+<hr>
 <%--Add a logout button--%>
 <form:form action="${pageContext.request.contextPath}/logout" method="post">
     <input type="submit" value="Logout">
