@@ -4,6 +4,7 @@
     <title>Leaders Page</title>
 </head>
 <body>
+<jsp:include page="logged_user.jsp"/>
 
 <h2>LEADERS Home Page</h2>
 <hr>

@@ -26,6 +26,11 @@
     <a href="${pageContext.request.contextPath}/leaders">Leadership Meeting</a>
     (only for manager peeps)
 </p>
+<%-- Add a link to point to /systems --%>
+<p>
+    <a href="${pageContext.request.contextPath}/systems">IT Systems Meeting</a>
+    (only for admin peeps)
+</p>
 
 
 <hr>
