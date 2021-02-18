@@ -1,10 +1,11 @@
 package miv.study.rest;
 
 import miv.study.entity.Student;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import miv.study.entity.StudentErrorResponse;
+import miv.study.exception.StudentNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
@@ -33,6 +34,18 @@ public class StudentRestController {
     // define endpoint for "/students/{studentId}" - return student at index
     @GetMapping("/students/{studentId}")
     public Student getStudent(@PathVariable int studentId) {
-        return studentList.get(studentId);
+        try {
+            return studentList.get(studentId);
+        } catch (IndexOutOfBoundsException e) {
+            throw new StudentNotFoundException("Student ID not found: " + studentId);
+        }
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exception) {
+        StudentErrorResponse errorResponse = new StudentErrorResponse(
+                HttpStatus.NOT_FOUND.value(), exception.getMessage(), System.currentTimeMillis());
+
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }
