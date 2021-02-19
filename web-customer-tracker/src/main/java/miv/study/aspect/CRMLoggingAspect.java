@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.logging.Logger;
 
 @Aspect
-@Component
+//@Component // exclude for some time
 public class CRMLoggingAspect {
 
     // setup logger
