@@ -1,12 +1,15 @@
 package miv.study.rest;
 
 import miv.study.entity.Customer;
+import miv.study.exception.NoSuchCustomerException;
 import miv.study.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.nio.file.FileAlreadyExistsException;
 import java.util.List;
 
 @RestController
@@ -20,5 +23,15 @@ public class CustomerRestController {
     @GetMapping("/customers")
     public List<Customer> getCustomers() {
         return customerService.getCustomers();
+    }
+    // add mapping for GET /customers/{id}
+    @GetMapping("/customers/{id}")
+    public Customer getCustomer(@PathVariable int id) {
+        Customer customer = customerService.getCustomer(id);
+        if (customer != null) {
+            return customerService.getCustomer(id);
+        } else {
+            throw new NoSuchCustomerException("No customer with id: " + id);
+        }
     }
 }
