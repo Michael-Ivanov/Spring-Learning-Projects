@@ -40,20 +40,4 @@ public class StudentRestController {
             throw new StudentNotFoundException("Student ID not found: " + studentId);
         }
     }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException exception) {
-        StudentErrorResponse errorResponse = new StudentErrorResponse(
-                HttpStatus.NOT_FOUND.value(), exception.getMessage(), System.currentTimeMillis());
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-    }
-
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleAllExceptions(Exception exception) {
-        StudentErrorResponse errorResponse = new StudentErrorResponse(
-                HttpStatus.BAD_REQUEST.value(), exception.getMessage(), System.currentTimeMillis());
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
-    }
 }
