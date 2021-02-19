@@ -2,10 +2,7 @@ package miv.study.config;
 
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -19,33 +16,47 @@ import java.util.Properties;
 @EnableTransactionManagement   // todo: check how it works if we remove this annotation
 @EnableAspectJAutoProxy
 @ComponentScan("miv.study")
+@PropertySource("classpath:persistence.properties")
 public class SpringBeanConfig {
 
     @Autowired
-    private Environment environment;
+    private Environment env;
 
     @Bean
     public DataSource myDataSource() {
-        ComboPooledDataSource cpds = new ComboPooledDataSource();
+        ComboPooledDataSource dataSource = new ComboPooledDataSource();
         try {
-            cpds.setDriverClass("org.postgresql.Driver");
-            cpds.setJdbcUrl("jdbc:postgresql://localhost/web_customer_tracker");
-            cpds.setUser("hbstudent");
-            cpds.setPassword("hbstudent");
-            cpds.setMinPoolSize(5);
-            cpds.setMaxPoolSize(20);
-            cpds.setMaxIdleTime(3000);
+            // set jdbc driver
+            dataSource.setDriverClass(env.getProperty("jdbc.driver"));
+            // set db connection properties
+            dataSource.setJdbcUrl(env.getProperty("jdbc.url"));
+            dataSource.setUser(env.getProperty("jdbc.user"));
+            dataSource.setPassword(env.getProperty("jdbc.password"));
+            // set connection pool properties
+            dataSource.setInitialPoolSize(getIntProperty("connection.pool.initialPoolSize"));
+            dataSource.setMinPoolSize(getIntProperty("connection.pool.minPoolSize"));
+            dataSource.setMaxPoolSize(getIntProperty("connection.pool.maxPoolSize"));
+            dataSource.setMaxIdleTime(getIntProperty("connection.pool.maxIdleTime"));
         } catch (PropertyVetoException e) {
             e.printStackTrace();
         }
-        return cpds;
+        return dataSource;
+    }
+
+    private int getIntProperty(String property) {
+        String propertyVal = env.getProperty(property);
+        if (propertyVal != null) {
+            return Integer.parseInt(propertyVal);
+        } else {
+            throw new RuntimeException("Connection pool property not found: " + property);
+        }
     }
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(myDataSource());
-        sessionFactory.setPackagesToScan("miv.study.entity");
+        sessionFactory.setPackagesToScan(env.getProperty("hibernate.packagesToScan"));
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -60,8 +71,8 @@ public class SpringBeanConfig {
 
     private Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect");
-        hibernateProperties.setProperty("hibernate.show_sql", "true");
+        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        hibernateProperties.setProperty("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
         return hibernateProperties;
     }
 
