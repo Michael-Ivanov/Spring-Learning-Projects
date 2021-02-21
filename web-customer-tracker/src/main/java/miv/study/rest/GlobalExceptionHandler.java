@@ -20,4 +20,14 @@ public class GlobalExceptionHandler {
                 LocalTime.now());
         return new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<NoResultEntity> exceptionHandling(Exception exception) {
+        NoResultEntity entity = new NoResultEntity(
+                HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage(),
+                LocalTime.now()
+        );
+        return new ResponseEntity<>(entity, HttpStatus.BAD_REQUEST);
+    }
 }
