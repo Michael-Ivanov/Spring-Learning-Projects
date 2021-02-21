@@ -30,7 +30,7 @@ public class CustomerRestController {
         if (customer == null) {
             throw new NoSuchCustomerException("No customer with id: " + id);
         }
-        return customerService.getCustomer(id);
+        return customer;
     }
 
     // add mapping for POST /customers to add new customer
@@ -58,5 +58,15 @@ public class CustomerRestController {
     public Customer updateCustomer(@RequestBody Customer customer) {
         customerService.saveCustomer(customer);
         return customer;
+    }
+
+    @DeleteMapping("/customers/{id}")
+    public String deleteCustomer(@PathVariable int id) {
+        Customer customer = customerService.getCustomer(id);
+        if (customer == null) {
+            throw new NoSuchCustomerException("Cannot delete. No such id: " + id);
+        }
+        customerService.deleteCustomer(id);
+        return "Deleted customer id: " + id;
     }
 }
