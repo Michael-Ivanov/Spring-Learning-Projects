@@ -1,6 +1,7 @@
 package miv.study.rest;
 
 import miv.study.entity.Customer;
+import miv.study.exception.CustomerAlreadyExistsException;
 import miv.study.exception.NoSuchCustomerException;
 import miv.study.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,21 @@ public class CustomerRestController {
     // add mapping for POST /customers to add new customer
     @PostMapping("/customers")
     public Customer addCustomer(@RequestBody Customer customer) {
+        if (alreadyExists(customer)) {
+            throw new CustomerAlreadyExistsException("Customer already exists: " + customer);
+        }
         customer.setId(0);
         customerService.saveCustomer(customer);
         return customer;
+    }
+
+    private boolean alreadyExists(Customer customer) {
+        List<Customer> customerList = customerService.getCustomers();
+        for (Customer tempCustomer : customerList) {
+            if (tempCustomer.equals(customer)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

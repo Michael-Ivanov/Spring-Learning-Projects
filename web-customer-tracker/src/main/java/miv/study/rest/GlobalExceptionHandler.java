@@ -1,6 +1,7 @@
 package miv.study.rest;
 
 import miv.study.entity.NoResultEntity;
+import miv.study.exception.CustomerAlreadyExistsException;
 import miv.study.exception.NoSuchCustomerException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,17 @@ public class GlobalExceptionHandler {
                 exception.getMessage(),
                 LocalTime.now());
         return new ResponseEntity<>(entity, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<NoResultEntity> customerAlreadyExists(
+            CustomerAlreadyExistsException exception) {
+        NoResultEntity entity = new NoResultEntity(
+                HttpStatus.FORBIDDEN.value(),
+                exception.getMessage(),
+                LocalTime.now()
+        );
+        return new ResponseEntity<>(entity, HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler
