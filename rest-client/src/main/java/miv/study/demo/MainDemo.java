@@ -3,6 +3,7 @@ package miv.study.demo;
 import miv.study.config.DemoAppConfig;
 import miv.study.entity.Customer;
 import miv.study.service.CustomerRestService;
+import miv.study.service.CustomerRestServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -14,10 +15,15 @@ public class MainDemo {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(DemoAppConfig.class);
 
-        CustomerRestService service = context.getBean(CustomerRestService.class);
+        // get rest-service instance
+        CustomerRestService service = context.getBean("customerRestServiceImpl", CustomerRestService.class);
 
+        // get list of customers
         List<Customer> customers = service.getCustomers();
+        System.out.println("Get customers: " + customers);
 
-        System.out.println(customers);
+        // add new customer
+        System.out.println("Adding new customer...");
+
     }
 }
