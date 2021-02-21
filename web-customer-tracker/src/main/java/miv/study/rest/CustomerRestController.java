@@ -4,11 +4,9 @@ import miv.study.entity.Customer;
 import miv.study.exception.NoSuchCustomerException;
 import miv.study.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @RestController
@@ -23,14 +21,22 @@ public class CustomerRestController {
     public List<Customer> getCustomers() {
         return customerService.getCustomers();
     }
+
     // add mapping for GET /customers/{id}
     @GetMapping("/customers/{id}")
     public Customer getCustomer(@PathVariable int id) {
         Customer customer = customerService.getCustomer(id);
-        if (customer != null) {
-            return customerService.getCustomer(id);
-        } else {
+        if (customer == null) {
             throw new NoSuchCustomerException("No customer with id: " + id);
         }
+        return customerService.getCustomer(id);
+    }
+
+    // add mapping for POST /customers to add new customer
+    @PostMapping("/customers")
+    public Customer addCustomer(@RequestBody Customer customer) {
+        customer.setId(0);
+        customerService.saveCustomer(customer);
+        return customer;
     }
 }
