@@ -23,7 +23,9 @@ public class MainDemo {
         System.out.println("Get customers: " + customers);
 
         // add new customer
-        System.out.println("Adding new customer...");
-
+        Customer customer = new Customer("John", "Malkovich", "jmalk@yandex.ru");
+        System.out.println("Adding new customer:" + customer);
+        service.saveCustomer(customer);
+        System.out.println("Customer saved");
     }
 }

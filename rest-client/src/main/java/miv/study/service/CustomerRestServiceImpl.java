@@ -30,14 +30,14 @@ public class CustomerRestServiceImpl implements CustomerRestService{
                         restUrl,
                         HttpMethod.GET,
                         null,
-                        new ParameterizedTypeReference<List<Customer>>() {
-                });
+                        new ParameterizedTypeReference<>() {
+                        });
         return responseEntity.getBody();
     }
 
     @Override
     public void saveCustomer(Customer customer) {
-
+        restTemplate.postForEntity(restUrl, customer, String.class);
     }
 
 
