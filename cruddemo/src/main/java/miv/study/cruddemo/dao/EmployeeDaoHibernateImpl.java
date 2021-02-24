@@ -21,12 +21,31 @@ public class EmployeeDaoHibernateImpl implements EmployeeDao {
     }
 
     @Override
-    @Transactional
     public List<Employee> findAll() {
         Session session = entityManager.unwrap(Session.class);
 
         Query<Employee> query = session.createQuery("from Employee", Employee.class);
 
         return query.getResultList();
+    }
+
+    @Override
+    public Employee findById(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        return session.get(Employee.class, id);
+    }
+
+    @Override
+    public void save(Employee employee) {
+        Session session = entityManager.unwrap(Session.class);
+        session.saveOrUpdate(employee); // if (id == 0) => save, else => update by id.
+    }
+
+    @Override
+    public void delete(int id) {
+        Session session = entityManager.unwrap(Session.class);
+        Query<?> query = session.createQuery("delete from Employee where id=:employeeId");
+        query.setParameter("employeeId", id);
+        query.executeUpdate();
     }
 }
