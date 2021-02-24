@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class EmployeeDaoHibernateImpl implements EmployeeDao {
 
-    EntityManager entityManager;
+    private EntityManager entityManager;
 
     @Autowired
     public EmployeeDaoHibernateImpl(EntityManager entityManager) {

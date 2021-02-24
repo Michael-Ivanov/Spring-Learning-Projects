@@ -1,9 +1,8 @@
 package miv.study.cruddemo.service;
 
-import miv.study.cruddemo.dao.EmployeeDao;
+import miv.study.cruddemo.dao.EmployeeRepository;
 import miv.study.cruddemo.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,36 +11,34 @@ import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeDao employeeDao;
+    private EmployeeRepository employeeRepository;
 
     @Autowired
-    public EmployeeServiceImpl(
-            @Qualifier(value = "employeeDAOJpaImpl")
-            EmployeeDao employeeDao) {
-        this.employeeDao = employeeDao;
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
+        this.employeeRepository = employeeRepository;
     }
 
     @Override
     @Transactional
     public List<Employee> findAll() {
-        return employeeDao.findAll();
+        return employeeRepository.findAll();
     }
 
     @Override
     @Transactional
     public Employee findById(int id) {
-        return employeeDao.findById(id);
+        return employeeRepository.findById(id).orElse(null);
     }
 
     @Override
     @Transactional
     public void save(Employee employee) {
-        employeeDao.save(employee);
+        employeeRepository.save(employee);
     }
 
     @Override
     @Transactional
     public void delete(int id) {
-        employeeDao.delete(id);
+        employeeRepository.deleteById(id);
     }
 }
