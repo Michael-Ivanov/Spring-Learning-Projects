@@ -1,6 +1,5 @@
 package miv.study.cruddemo.rest;
 
-import miv.study.cruddemo.dao.EmployeeDao;
 import miv.study.cruddemo.entity.Employee;
 import miv.study.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +37,21 @@ public class EmployeeRestController {
         employee.setId(0); // explicitly set id to 0 in case it is not
         employeeService.save(employee);
         return employee;
+    }
+
+    @PutMapping("/employees")
+    public Employee update(@RequestBody Employee employee) {
+        employeeService.save(employee);
+        return employee;
+    }
+
+    @DeleteMapping("/employees/{id}")
+    public String delete(@PathVariable int id) {
+        Employee employee = employeeService.findById(id);
+        if (employee == null) {
+            throw new RuntimeException("Employee id not found: " + id);
+        }
+        employeeService.delete(id);
+        return "Employee with id " + id + " deleted";
     }
 }
