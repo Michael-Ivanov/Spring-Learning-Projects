@@ -4,9 +4,13 @@ import miv.study.cruddemo.entity.Employee;
 import miv.study.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -27,9 +31,9 @@ public class EmployeeRestController {
     @GetMapping("/employees/{id}")
     public Employee findById(@PathVariable int id) {
         Employee employee = employeeService.findById(id);
-        if (employee == null) {
-            throw new RuntimeException("Employee id not found: " + id);
-        }
+//        if (employee == null) {
+//            throw new RuntimeException("Employee id not found: " + id);
+//        }
         return employee;
     }
 
@@ -54,5 +58,10 @@ public class EmployeeRestController {
         }
         employeeService.delete(id);
         return "Employee with id " + id + " deleted";
+    }
+
+    @ExceptionHandler
+    public ResponseEntity<?> employeeNotFound(NoSuchElementException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 }

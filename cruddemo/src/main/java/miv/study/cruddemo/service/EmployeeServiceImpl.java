@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -27,7 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public Employee findById(int id) {
-        return employeeRepository.findById(id).orElse(null);
+        return employeeRepository.findById(id).orElseThrow(
+                () -> new NoSuchElementException("Employee id not found: " + id));
     }
 
     @Override
