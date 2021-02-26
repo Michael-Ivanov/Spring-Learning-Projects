@@ -1,7 +1,7 @@
 package miv.study.thymeleafdemo.controller;
 
-import miv.study.thymeleafdemo.dao.EmployeeRepository;
 import miv.study.thymeleafdemo.entity.Employee;
+import miv.study.thymeleafdemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +14,17 @@ import java.util.List;
 @RequestMapping("/employees")
 public class EmployeeController {
 
+    private EmployeeService employeeService;
+
     @Autowired
-    private EmployeeRepository employeeRepository;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
 
     @GetMapping("/list")
     public String listEmployees(Model model) {
 
-        List<Employee> employees = employeeRepository.findAll();
+        List<Employee> employees = employeeService.getEmployeesList();
         model.addAttribute("employees", employees);
 
         return "list-employees";
