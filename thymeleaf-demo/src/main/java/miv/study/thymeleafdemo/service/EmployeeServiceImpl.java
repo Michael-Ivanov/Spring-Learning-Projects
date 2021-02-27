@@ -24,6 +24,11 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<Employee> getEmployeesSorted() {
+        return employeeRepository.findAllByOrderByLastNameAsc();
+    }
+
+    @Override
     public Employee getEmployee(int id) {
         return employeeRepository.findById(id).orElseThrow(
                 () -> new NoSuchElementException("Employee id not found: " + id));
