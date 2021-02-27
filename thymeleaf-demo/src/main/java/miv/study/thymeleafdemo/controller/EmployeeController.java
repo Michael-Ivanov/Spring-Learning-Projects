@@ -5,8 +5,7 @@ import miv.study.thymeleafdemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +27,17 @@ public class EmployeeController {
         model.addAttribute("employees", employees);
 
         return "list-employees";
+    }
+
+    @GetMapping("/addEmployee")
+    public String addEmployee(Model model) {
+        model.addAttribute("newEmployee", new Employee());
+        return "employee-form";
+    }
+
+    @PostMapping("/saveEmployee")
+    public String saveEmployee(@ModelAttribute("ggg") Employee employee) {
+        employeeService.addEmployee(employee);
+        return "redirect:/employees/list";
     }
 }
