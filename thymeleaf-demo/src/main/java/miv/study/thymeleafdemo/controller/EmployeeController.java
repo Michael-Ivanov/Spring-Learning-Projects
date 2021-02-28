@@ -23,7 +23,7 @@ public class EmployeeController {
     @GetMapping("/list")
     public String listEmployees(Model model) {
 
-        List<Employee> employees = employeeService.getEmployeesSorted();
+        List<Employee> employees = employeeService.getEmployeesList();
         model.addAttribute("employees", employees);
 
         return "list-employees";
@@ -47,5 +47,11 @@ public class EmployeeController {
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
         return "employee-form";
+    }
+
+    @GetMapping("/deleteEmployee")
+    public String deleteEmployee(@RequestParam("employeeId") int id) {
+        employeeService.deleteEmployee(id);
+        return "redirect:/employees/list";
     }
 }
