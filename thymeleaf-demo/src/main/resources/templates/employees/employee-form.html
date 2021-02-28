@@ -13,6 +13,9 @@
 </head>
 <body>
 <div class="container m-3">
+
+    <div th:include="/users/logged-user"></div>
+
     <h3>Add New Employee</h3>
     <hr>
     <form th:action="@{/employees/saveEmployee}" th:object="${employee}" method="POST">

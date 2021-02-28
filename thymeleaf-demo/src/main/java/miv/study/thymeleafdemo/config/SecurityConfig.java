@@ -34,7 +34,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/resources/**").permitAll()
                 .and()
                 .formLogin()
+                        .permitAll()
+                        .defaultSuccessUrl("/employees/list")
                 .and()
-                .logout().permitAll();
+                .logout()
+                        .permitAll()
+                        .logoutSuccessUrl("/home");
+
     }
 }

@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.Date;
 
 @Controller
-public class DemoController {
+public class HomeController {
 
-    @GetMapping("/hello")
+    @GetMapping("/home")
     public String sayHello(Model model) {
         model.addAttribute("theDate", new Date());
-        return "helloworld";
+        return "home";
     }
 }
