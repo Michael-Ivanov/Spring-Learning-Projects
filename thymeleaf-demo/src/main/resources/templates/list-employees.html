@@ -24,9 +24,9 @@
     <table class="table table-bordered table-striped">
         <thead class="table-dark">
         <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
+            <th><a th:href="@{/employees/list(sorting='first-name')}" style="color: white">First Name</a></th>
+            <th><a th:href="@{/employees/list(sorting='last-name')}" style="color: white">Last Name</a></th>
+            <th><a th:href="@{/employees/list(sorting='email')}" style="color: white">Email</a></th>
             <th>Action</th>
         </tr>
         </thead>

@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface EmployeeService {
 
-    List<Employee> getEmployeesList();
-
-    List<Employee> getEmployeesSorted();
+    List<Employee> getEmployeesList(String sorting);
 
     Employee getEmployee(int id);
 

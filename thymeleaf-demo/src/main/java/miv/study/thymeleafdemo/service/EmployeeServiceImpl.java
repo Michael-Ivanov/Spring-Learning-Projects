@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
-    private EmployeeRepository employeeRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Autowired
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
@@ -19,13 +19,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<Employee> getEmployeesList() {
-        return employeeRepository.findAll();
-    }
-
-    @Override
-    public List<Employee> getEmployeesSorted() {
-        return employeeRepository.findAllByOrderByLastNameAsc();
+    public List<Employee> getEmployeesList(String sorting) {
+        // todo: think how to refactor this piece of ...
+        List<Employee> list;
+        if (sorting == null) {
+            list = employeeRepository.findAll();
+        } else if (sorting.equals("first-name")) {
+            list = employeeRepository.findAllByOrderByFirstNameAsc();
+        } else if (sorting.equals("last-name")) {
+            list = employeeRepository.findAllByOrderByLastNameAsc();
+        } else if (sorting.equals("email")) {
+            list = employeeRepository.findAllByOrderByEmailAsc();
+        } else {
+            list = employeeRepository.findAll();
+        }
+        return list;
     }
 
     @Override

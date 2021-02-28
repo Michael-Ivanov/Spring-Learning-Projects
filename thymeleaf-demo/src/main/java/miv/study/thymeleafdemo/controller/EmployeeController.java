@@ -21,11 +21,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/list")
-    public String listEmployees(Model model) {
-
-        List<Employee> employees = employeeService.getEmployeesList();
+    public String listEmployees(@RequestParam(required = false, value = "sorting") String sorting,
+                                Model model) {
+        List<Employee> employees = employeeService.getEmployeesList(sorting);
         model.addAttribute("employees", employees);
-
         return "list-employees";
     }
 
