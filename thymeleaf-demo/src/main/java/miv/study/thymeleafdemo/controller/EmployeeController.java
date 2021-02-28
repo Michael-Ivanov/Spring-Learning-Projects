@@ -31,7 +31,7 @@ public class EmployeeController {
 
     @GetMapping("/addEmployee")
     public String addEmployee(Model model) {
-        model.addAttribute("newEmployee", new Employee());
+        model.addAttribute("employee", new Employee());
         return "employee-form";
     }
 
@@ -39,5 +39,13 @@ public class EmployeeController {
     public String saveEmployee(@ModelAttribute("ggg") Employee employee) {
         employeeService.addEmployee(employee);
         return "redirect:/employees/list";
+    }
+
+    @GetMapping("/updateEmployee")
+    public String updateEmployee(@RequestParam("employeeId") int id,
+                                 Model model) {
+        Employee employee = employeeService.getEmployee(id);
+        model.addAttribute("employee", employee);
+        return "employee-form";
     }
 }
