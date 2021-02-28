@@ -25,13 +25,13 @@ public class EmployeeController {
                                 Model model) {
         List<Employee> employees = employeeService.getEmployeesList(sorting);
         model.addAttribute("employees", employees);
-        return "list-employees";
+        return "employees/list-employees";
     }
 
     @GetMapping("/addEmployee")
     public String addEmployee(Model model) {
         model.addAttribute("employee", new Employee());
-        return "employee-form";
+        return "employees/employee-form";
     }
 
     @PostMapping("/saveEmployee")
@@ -45,7 +45,7 @@ public class EmployeeController {
                                  Model model) {
         Employee employee = employeeService.getEmployee(id);
         model.addAttribute("employee", employee);
-        return "employee-form";
+        return "employees/employee-form";
     }
 
     @GetMapping("/deleteEmployee")

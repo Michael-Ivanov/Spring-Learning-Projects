@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -14,7 +16,16 @@
 
 </head>
 <body>
+
 <div class="container m-3">
+
+    <div sec:authorize="isAuthenticated()" class="alert alert-info">
+        You are logged as <span sec:authentication="name"></span>
+    </div>
+    <div sec:authorize="isAnonymous()" class="alert-info alert-danger">
+        Please log in
+    </div>
+
     <h3>Employee Directory</h3>
     <hr>
 
@@ -30,14 +41,14 @@
             <th>Action</th>
         </tr>
         </thead>
-        <tbody >
+        <tbody>
         <tr th:each="employee : ${employees}">
             <td th:text="${employee.firstName}"></td>
             <td th:text="${employee.lastName}"></td>
             <td th:text="${employee.email}"></td>
 
             <td><a th:href="@{/employees/updateEmployee(employeeId=${employee.id})}"
-                    class="btn btn-primary btn-sm ">Update</a>
+                   class="btn btn-primary btn-sm ">Update</a>
                 <a th:href="@{/employees/deleteEmployee(employeeId=${employee.id})}"
                    onclick="if (!(confirm('Are you sure you want to delete this customer?'))) return false"
                    class="btn btn-warning btn-sm ">Delete</a>
