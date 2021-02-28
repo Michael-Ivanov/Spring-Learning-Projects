@@ -14,4 +14,9 @@ public class HomeController {
         model.addAttribute("theDate", new Date());
         return "home";
     }
+
+    @GetMapping("/showLoginPage")
+    public String showLoginPage() {
+        return "custom-login";
+    }
 }
