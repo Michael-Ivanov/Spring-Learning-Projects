@@ -7,10 +7,27 @@ import com.rabbitmq.client.DeliverCallback;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Receiver {
+public class MessengerImpl implements Messenger {
 
-    public static final String QUEUE_NAME = "hello";
+    private final static String QUEUE_NAME = "hello";
 
+    @Override
+    public void sendMessage(String message) {
+        ConnectionFactory factory = new ConnectionFactory();
+        factory.setHost("localhost");
+        try (Connection connection = factory.newConnection();
+             Channel channel = connection.createChannel()) {
+
+            channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+            channel.basicPublish("", QUEUE_NAME, null, message.getBytes());
+            System.out.println(" Sent '" + message + "'");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
     public String receiveMessage() {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
@@ -24,14 +41,11 @@ public class Receiver {
                 System.out.println(" Received '" + message + "'");
             };
 
-            return channel.basicConsume(QUEUE_NAME, true, deliverCallback, s -> {});
+            return channel.basicConsume(QUEUE_NAME, true, deliverCallback, s -> {
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "No message. Something wrong.";
-    }
-
-    public String displayMessage(String message) {
-        return message;
     }
 }
