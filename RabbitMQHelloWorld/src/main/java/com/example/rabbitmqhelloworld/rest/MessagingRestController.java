@@ -1,17 +1,21 @@
 package com.example.rabbitmqhelloworld.rest;
 
-import com.example.rabbitmqhelloworld.messaging.MessengerImpl;
+import com.example.rabbitmqhelloworld.messaging.Messenger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/message")
 public class MessagingRestController {
 
-    private MessengerImpl messenger;
+    private Messenger messenger;
 
     @Autowired
-    public MessagingRestController(MessengerImpl messenger) {
+    public MessagingRestController(@Qualifier("rabbitTemplateMessengerImpl") Messenger messenger) {
         this.messenger = messenger;
     }
 
